@@ -21,7 +21,7 @@
 
     <a
       href="/"
-      class="mt-4 inline-flex items-center text-sm font-medium text-blue-600 hover:text-purple-600 transition-colors"
+      class="mt-4 inline-flex items-center text-sm font-medium text-primary-600 hover:text-primary-700 transition-colors"
     >
       <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
