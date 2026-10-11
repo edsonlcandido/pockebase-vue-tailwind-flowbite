@@ -1,157 +1,61 @@
 <template>
-  <div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 py-12 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-md w-full space-y-8">
-      <div class="text-center">
-        <div class="inline-block mb-4">
-          <div class="w-20 h-20 bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center mx-auto shadow-2xl transform hover:scale-110 transition-transform">
-            <span class="text-4xl">🔐</span>
-          </div>
-        </div>
-        <h2 class="mt-6 text-center text-4xl font-extrabold text-gray-900">
-          {{ isRegistering ? '✨ Criar conta' : '👋 Bem-vindo de volta' }}
-        </h2>
-        <p class="mt-3 text-center text-base text-gray-600">
-          {{ isRegistering ? 'Preencha os dados para criar sua conta' : 'Entre com suas credenciais para continuar' }}
-        </p>
-        <p class="mt-2 text-center text-sm">
-          <a href="/" class="font-semibold text-blue-600 hover:text-purple-600 transition-colors inline-flex items-center">
-            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+  <!-- Flowbite Marketing UI – Authentication Page -->
+  <div class="min-h-screen flex bg-gray-50 dark:bg-gray-900">
+    <!-- Left panel – branding / illustration (hidden on mobile) -->
+    <div class="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 flex-col justify-between p-12">
+      <div>
+        <div class="flex items-center gap-3 mb-12">
+          <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center backdrop-blur-sm">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
             </svg>
-            Voltar para a landing page
-          </a>
+          </div>
+          <span class="text-2xl font-extrabold text-white">MyApp</span>
+        </div>
+        <h1 class="text-4xl font-bold text-white mb-4 leading-tight">
+          A plataforma mais simples para o seu negócio
+        </h1>
+        <p class="text-blue-100 text-lg leading-relaxed">
+          Gerencie seus dados, usuários e conteúdo com facilidade usando PocketBase + Vue 3.
         </p>
       </div>
-      
-      <div class="bg-white py-10 px-6 shadow-2xl rounded-2xl sm:px-12 border border-gray-100">
-        <form class="space-y-6" @submit.prevent="handleSubmit">
-          <div v-if="error" class="rounded-xl bg-red-50 p-4 border-l-4 border-red-500 shadow-sm">
-            <div class="flex">
-              <div class="flex-shrink-0">
-                <svg class="h-5 w-5 text-red-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
-                </svg>
-              </div>
-              <div class="ml-3">
-                <h3 class="text-sm font-semibold text-red-800">
-                  {{ error }}
-                </h3>
-              </div>
-            </div>
-          </div>
 
-          <div v-if="isRegistering">
-            <label for="name" class="block text-sm font-semibold text-gray-700 mb-2">
-              Nome Completo
-            </label>
-            <div class="mt-1">
-              <input
-                id="name"
-                v-model="formData.name"
-                type="text"
-                autocomplete="name"
-                class="appearance-none block w-full px-4 py-3 border-2 border-gray-300 rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all sm:text-sm hover:border-gray-400"
-                placeholder="João Silva"
-              />
-            </div>
+      <!-- Feature list -->
+      <ul class="space-y-4">
+        <li v-for="feature in features" :key="feature" class="flex items-center gap-3 text-white">
+          <div class="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center shrink-0">
+            <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+            </svg>
           </div>
+          <span class="text-sm font-medium">{{ feature }}</span>
+        </li>
+      </ul>
+    </div>
 
-          <div>
-            <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">
-              E-mail
-            </label>
-            <div class="mt-1">
-              <input
-                id="email"
-                v-model="formData.email"
-                type="email"
-                autocomplete="email"
-                required
-                class="appearance-none block w-full px-4 py-3 border-2 border-gray-300 rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all sm:text-sm hover:border-gray-400"
-                placeholder="seu@email.com"
-              />
-            </div>
-          </div>
+    <!-- Right panel – form -->
+    <div class="flex-1 flex items-center justify-center px-6 py-12 lg:px-12">
+      <div class="w-full max-w-md space-y-6">
+        <AuthBrand
+          :title="isRegistering ? 'Criar nova conta' : 'Bem-vindo de volta'"
+          :subtitle="isRegistering ? 'Preencha os dados para criar sua conta' : 'Entre com suas credenciais para continuar'"
+        />
 
-          <div>
-            <label for="password" class="block text-sm font-semibold text-gray-700 mb-2">
-              Senha
-            </label>
-            <div class="mt-1">
-              <input
-                id="password"
-                v-model="formData.password"
-                type="password"
-                autocomplete="current-password"
-                required
-                class="appearance-none block w-full px-4 py-3 border-2 border-gray-300 rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all sm:text-sm hover:border-gray-400"
-                placeholder="••••••••"
-              />
-            </div>
-          </div>
-
-          <div v-if="isRegistering">
-            <label for="passwordConfirm" class="block text-sm font-semibold text-gray-700 mb-2">
-              Confirmar Senha
-            </label>
-            <div class="mt-1">
-              <input
-                id="passwordConfirm"
-                v-model="formData.passwordConfirm"
-                type="password"
-                autocomplete="new-password"
-                required
-                class="appearance-none block w-full px-4 py-3 border-2 border-gray-300 rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all sm:text-sm hover:border-gray-400"
-                placeholder="••••••••"
-              />
-            </div>
-          </div>
-
-          <div>
-            <button
-              type="submit"
-              :disabled="loading"
-              class="group w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-xl shadow-lg text-base font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all transform hover:scale-[1.02]"
-            >
-              <span v-if="loading" class="flex items-center">
-                <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
-                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                </svg>
-                Carregando...
-              </span>
-              <span v-else class="flex items-center">
-                {{ isRegistering ? '✨ Criar conta' : '🚀 Entrar' }}
-                <svg class="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
-                </svg>
-              </span>
-            </button>
-          </div>
-        </form>
-
-        <div class="mt-8">
-          <div class="relative">
-            <div class="absolute inset-0 flex items-center">
-              <div class="w-full border-t-2 border-gray-200" />
-            </div>
-            <div class="relative flex justify-center text-sm">
-              <span class="px-4 bg-white text-gray-600 font-medium">
-                {{ isRegistering ? '🔑 Já tem uma conta?' : '🆕 Não tem uma conta?' }}
-              </span>
-            </div>
-          </div>
-
-          <div class="mt-6">
-            <button
-              type="button"
-              @click="toggleMode"
-              class="w-full flex justify-center items-center py-3 px-4 border-2 border-gray-300 rounded-xl shadow-sm text-base font-semibold text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all transform hover:scale-[1.02]"
-            >
-              {{ isRegistering ? '👋 Fazer Login' : '✨ Criar Nova Conta' }}
-            </button>
-          </div>
-        </div>
+        <AuthFormCard
+          :is-registering="isRegistering"
+          :loading="loading"
+          :error="error"
+          :name="formData.name"
+          :email="formData.email"
+          :password="formData.password"
+          :password-confirm="formData.passwordConfirm"
+          @submit="handleSubmit"
+          @toggle-mode="toggleMode"
+          @update:name="formData.name = $event"
+          @update:email="formData.email = $event"
+          @update:password="formData.password = $event"
+          @update:password-confirm="formData.passwordConfirm = $event"
+        />
       </div>
     </div>
   </div>
@@ -161,6 +65,8 @@
 import { ref, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '../stores/auth'
+import AuthBrand from '../components/auth/AuthBrand.vue'
+import AuthFormCard from '../components/auth/AuthFormCard.vue'
 
 const router = useRouter()
 const authStore = useAuthStore()
@@ -175,6 +81,13 @@ const formData = ref({
   password: '',
   passwordConfirm: '',
 })
+
+const features = [
+  'Autenticação segura com PocketBase',
+  'Dashboard moderno com Vue 3 + TypeScript',
+  'UI inspirada nos blocos do Flowbite',
+  'Totalmente customizável e responsivo',
+]
 
 function toggleMode() {
   isRegistering.value = !isRegistering.value
@@ -209,7 +122,6 @@ async function handleSubmit() {
     }
 
     if (result.success) {
-      // Aguarda o próximo tick do Vue para garantir que o estado foi atualizado
       await nextTick()
       await router.push('/dashboard')
     } else {
